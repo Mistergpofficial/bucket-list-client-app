@@ -1,4 +1,4 @@
-//export const apiDomain = "http://localhost:6000/api/v1/"
+//export const apiDomain = "http://localhost:2000/api/v1/"
 export const apiDomain = "https://geepee-bucketlistapi.herokuapp.com/api/v1/"
 export const regUrl =  apiDomain + "auth/register"
 export const loginUrl = apiDomain + "auth/login"

@@ -9,6 +9,7 @@ import EditBucketList from "./views/EditBucketList.vue"
 import AddItemToBucketList from './views/AddItemToBucketList.vue'
 import BucketListItemById from './views/ShowBucketListItemById.vue'
 import EditBucketListItem from "./views/EditBucketListItem.vue"
+import Error from './views/NotFound.vue'
 import Axios from 'axios'
 
 
@@ -28,13 +29,14 @@ const router = new VueRouter({
       path: '/login',
       name: 'login',
       component: Login,
+      meta: { forVisitors: true} 
     },
     {
       path: '/bucketlists',
       name: 'bucketlist',
       component: Dashboard,
       meta:{
-        requiresAuth:true
+        forAuth: true
     }
     },
     {
@@ -42,7 +44,7 @@ const router = new VueRouter({
       name: 'bucketlists',
       component: BucketList,
       meta:{
-        requiresAuth:true
+        forAuth: true
     }
     },
     {
@@ -50,7 +52,7 @@ const router = new VueRouter({
       name: 'bucketlistById',
       component: BucketListById,
       meta: {
-        requiresAuth: true
+        forAuth: true
       }
     },
     {
@@ -58,7 +60,7 @@ const router = new VueRouter({
       name: "editBucketList",
       component: EditBucketList,
       meta: {
-        requiresAuth: true
+        forAuth: true
       }
     },
     {
@@ -66,7 +68,7 @@ const router = new VueRouter({
       name: 'addItemToBucketList',
       component: AddItemToBucketList,
       meta: {
-        requiresAuth: true
+        forAuth: true
       }
     },
     {
@@ -74,7 +76,7 @@ const router = new VueRouter({
       name: 'bucketlistItemById',
       component: BucketListItemById,
       meta: {
-        requiresAuth: true
+        forAuth: true
       }
     },
     {
@@ -82,39 +84,16 @@ const router = new VueRouter({
       name: "editBucketListItem",
       component: EditBucketListItem,
       meta: {
-        requiresAuth: true
+        forAuth: true
       }
     },
+    {
+      path: '*',
+      name: 'Error',
+      component: Error
+  }
   ]
 });
-
-// router.beforeEach((to,from,next)=>{
-//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth );
-//   const currentUser = store.getters.currentUser;
-
-//   if(requiresAuth && !currentUser){
-//       store.commit("showAlert","You need to login for accessing this content. new user ? register now")
-//       next('/login');
-//   } else if(to.path == '/login' && currentUser){
-//       next('/');
-//   } else {
-//       next();
-//   }
-//   setTimeout(()=>{
-//       store.commit("showAlert","")
-//   },5000)
-// });
-
-// Axios.interceptors.response.use(null,(error)=>{
-//   if(error.response.status == 401){
-//       store.commit('logout');
-//       router.push('/login');
-//   }
-//   return Promise.reject(error);
-// });
-
-
-
 
 
 
