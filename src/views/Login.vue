@@ -51,7 +51,7 @@
                   <div class="col-xs-12 col-sm-12">
                       <p style="color:red;" v-if="errors.length > 0">{{ errors }}</p><br/>
                                 
-                    <form @submit.prevent="login" name="loginForm" class="loginForm" action="#" method="POST">
+                    <form @submit.prevent="login" name="loginForm" class="loginForm" action="#" method="POST" @keydown="clear($event.target.name)">
                       <div class="form-group">
                         <input type="email" class="form-control email" name="email" v-model="loginData.email" placeholder="Email address">
                       </div>
@@ -193,7 +193,10 @@
               .catch(err => {
                 this.errors = err.body
               })
-            }
+            },
+              clear(){
+            this.error = false;
+                 }, 
             
         }
 

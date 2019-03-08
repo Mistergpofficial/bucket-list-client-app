@@ -19,7 +19,7 @@
                                     <label>Select BucketList</label>
                                     <select name="bucketlist_id" class="form-control" v-model="itemData.bucketlist_id">
                                         <option value="0">Choose a bucketlist --*</option>
-                                        <option v-for="bucket in bucketlists"  v-bind:value="bucket._id" v-if="bucket.full_name === currentUser.full_name">{{bucket.bucket_list_name}}</option>
+                                        <option v-for="bucket in bucketlistsRetrieved.bucketArray"  v-bind:value="bucket._id" v-if="bucket.full_name === currentUser.full_name">{{bucket.bucket_list_name}}</option>
                                     </select>
                                 </div>
                     

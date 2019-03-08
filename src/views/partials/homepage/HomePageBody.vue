@@ -7,7 +7,7 @@
                 <div class="col-md-4 panel">
                  
                     <!-- sign in form begins -->
-                    <form @submit.prevent="register()"  class="form-horizontal" enctype="multipart/form-data" >
+                    <form @submit.prevent="register()"  class="form-horizontal" enctype="multipart/form-data" @keydown="clear($event.target.name)">
                         <fieldset>
                              <div class="alert alert-success" v-if="submitted">
                                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
@@ -93,7 +93,10 @@
               .catch(err => {
                 this.errors = err.body
               })
-            }
+            },
+              clear(){
+            this.errors = false;
+                 }, 
 
                 
 
