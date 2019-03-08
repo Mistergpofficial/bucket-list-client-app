@@ -6,7 +6,7 @@
  <br>
  <br>
         <div class="row col-md-9 col-lg-9 col-sm-9 pull-left">
-            <div class="jumbotron">
+            <div class="jumbotron" v-if="outcome.full_name === currentUser.full_name">
             <h1>{{ outcome.item_name }}</h1>
              <p class="lead">Created:{{ outcome.createdAt | timeago }}</p>
               <p class="lead" v-if="outcome.done === false">Status: <span>Not Done</span></p>
@@ -21,9 +21,9 @@
         <div class="col-sm-3 col-md-3 col-lg-3 pull-right" style="padding: 60px;">
             <div class="sidebar-module">
                 <h4>Actions</h4>
-                <ol class="list-unstyled">
-                    <li><a :href="`/bucketlists/${outcome.bucketlist}/item/${outcome._id}/edit`">Edit Item</a></li>
-                    <li><a @click="remove">Delete</a></li>
+                <ol class="list-unstyled" v-if="outcome.full_name === currentUser.full_name">
+                    <li><a :href="`/bucketlists/${outcome.bucketlist}/item/${outcome._id}/edit`">Edit Bucket List Item</a></li>
+                    <li><a @click="remove">Delete Bucket List Item</a></li>
                     <li><a :href="`/bucketlists/${outcome.bucketlist}/items`">Add Item to Bucket List</a></li>
                     <li><a :href="`/bucketlists`">Bucket Listing</a></li>
                     <li><a :href="`/bucketlists/create`">Create new Bucket List</a></li>
@@ -75,18 +75,25 @@ export default {
               this.outcome = response.data
           })
           },
-        async remove(){
-            try{
-                let shouldDelete = confirm('Are you sure you want to delete this company');
+          remove() {
+              let shouldDelete = confirm('Are you sure you want to delete this bucket list item');
 
-                if (!shouldDelete) return;
-                const response = await BucketListService.removed(this.$route.params.id, this.bucketlist)
-                this.$router.push('/bucketlists')
-            }
-            catch(err){
-            this.errors = err.response.data.errors
-            }
-        },
+              if (!shouldDelete) return;
+
+              this.$http.delete(getBucketListById + this.$route.params.id + '/items/' + this.$route.params.item, {
+              headers:{
+						"Authorization":"Bearer "+ this.$store.state.token
+					}
+          }).then(response => {
+                      alert("Successfully Deleted !!");
+                        window.location = "/bucketlists"
+                   //  this.$router.push('/bucketlists')
+                  })
+                  .catch(() => {
+                      alert('error', "could not delete !!");
+                  })
+
+          },
          logout: function () {
         this.$store.dispatch('logout')
         .then(() => {

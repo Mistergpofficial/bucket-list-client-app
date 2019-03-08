@@ -29,6 +29,9 @@
                                 <input type="text" name="item_name" v-model="itemData.item_name" class="form-control" placeholder="Enter name">
                             </div>
 
+                             <input type="hidden" name="full_name" v-model="itemData.full_name">
+                           
+
                             <div class="group">
                                 <button type="submit" :class="[ (saving)?  'is-loading' : '' ]" class="button" >Create</button>
                             </div>
@@ -64,7 +67,8 @@
             return {
                 itemData: {
                     item_name: '',
-                    bucketlist_id: this.$route.params.id
+                    bucketlist_id: this.$route.params.id,
+                    full_name: this.$store.getters.currentUser.full_name
                 },
                 saving: false,
                 submitted: false,

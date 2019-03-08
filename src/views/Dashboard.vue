@@ -9,25 +9,19 @@
                 <p>Welcome, {{ currentUser.full_name }} || <a @click="logout">Logout</a>
                 
                 <div class="panel-heading">Buckets <a class="pull-right btn btn-primary btn-sm" :href="`/bucketlists/create`">Create new</a></div>
-                    <div class="panel-body">
+                    <div class="panel-body" v-if="bucketlistsRetrieved.count > 0">
                         <ul class="list-group" v-for="bucket in bucketlistsRetrieved.bucketArray" v-bind:key="bucket._id" v-show="bucket.full_name === currentUser.full_name">
         <li class="list-group-item">
             <a :href="`/bucketlists/${bucket._id}`" class="btn-default">{{ bucket.bucket_list_name }} || created by {{ bucket.full_name }}</a>
         </li>
-        
-
-<span v-if="bucket.full_name === currentUser.full_name === 0">
+        </ul>
+</div>
+                <span v-if="!bucketlistsRetrieved.count">
                  <center class="m-t-lg">Bucket List is empty.</center>
                 </span>
-
-    </ul>
-
-      
-
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
+ </div>
 
 
 </div>
@@ -71,7 +65,8 @@ export default {
          logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
-          this.$router.push({name: 'login'})
+            window.location = "/login"
+          //this.$router.push({name: 'login'})
         })
       }
     }

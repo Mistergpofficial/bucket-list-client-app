@@ -7,7 +7,7 @@
  <br>
         <div class="row col-md-9 col-lg-9 col-sm-9 pull-left">
             <div class="jumbotron">
-            <h1>{{ bucketlist.bucket_list_name }}</h1>
+            <h1 v-if="bucketlist.full_name === currentUser.full_name">{{ bucketlist.bucket_list_name }}</h1>
             <p class="lead"></p>
             <p><a class="btn btn-lg btn-success">Get Started Today</a></p>
             </div>
@@ -17,17 +17,18 @@
                  -->
                  
                  <p><u>Items in your Bucket List</u></p><br/><br/>
-                <span v-for="item in items.itemArray" :key="item._id" >
+                <span v-for="item in items.itemArray" :key="item._id" v-if="item.bucketlist === params">
                 <div class="col-lg-4 col-lg-4 col-sm-4">
-                    <h2></h2>
-                    
-                        <p class="text-danger">{{ item.item_name }}</p>
-                        <p><a :href="`/bucketlists/${bucketlist._id}/item/${item._id}`" class="btn btn-primary" role="button">View Item</a></p>
+                 <p class="text-danger">{{ item.item_name }}</p>
+                 <p><a :href="`/bucketlists/${bucketlist._id}/item/${item._id}`" class="btn btn-primary" role="button">View Item</a></p>
                 </div>
-                </span>
-                <span v-if="items.itemArray && items.itemArray.length === 0">
-                 <center class="m-t-lg">Bucket List is empty.</center>
-                </span>
+                </span><br/><br/>
+                <div id="alert-info" v-if="!items.count">
+                    <center class="m-t-lg">{{ items.message }}</center>
+                </div>
+                 <!-- <span v-if="!items.count">
+                 <center class="m-t-lg">{{ items.message }}</center>
+                </span> -->
             </div>
         </div>
 
@@ -35,10 +36,10 @@
         <div class="col-sm-3 col-md-3 col-lg-3 pull-right" style="padding: 60px;">
             <div class="sidebar-module">
                 <h4>Actions</h4>
-                <ol class="list-unstyled">
+                <ol class="list-unstyled" v-show="bucketlist.full_name === currentUser.full_name">
                     <li><a :href="`/bucketlists/${bucketlist._id}/edit`">Edit Bucket List</a></li>
-                    <li><a @click="remove">Delete</a></li>
-                    <li><a :href="`/bucketlists/${bucketlist._id}/items`">Add Item</a></li>
+                    <li><a @click="remove">Delete Bucket List</a></li>
+                    <li><a :href="`/bucketlists/${bucketlist._id}/items`">Add Item to Bucket List</a></li>
                     <li><a :href="`/bucketlists`">Bucket Listing</a></li>
                     <li><a :href="`/bucketlists/create`">Create new Bucket List</a></li>
                 </ol>
@@ -111,13 +112,14 @@ export default {
 
               if (!shouldDelete) return;
 
-              this.$http.delete(getBucketListById + this.$route.params.id, this.bucketlist, {
+              this.$http.delete(getBucketListById + this.$route.params.id, {
               headers:{
 						"Authorization":"Bearer "+ this.$store.state.token
 					}
           }).then(response => {
                       alert("Successfully Deleted !!");
-                     this.$router.push('/bucketlists')
+                      window.location = "/bucketlists"
+                     //this.$router.push('/bucketlists')
                   })
                   .catch(() => {
                       alert('error', "could not delete !!");
