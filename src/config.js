@@ -1,4 +1,5 @@
-export const apiDomain = "http://localhost:4000/api/v1/"
+//export const apiDomain = "http://localhost:4000/api/v1/"
+export const apiDomain = "https://bucket-list-server-side-app.herokuapp.com/"
 export const regUrl =  apiDomain + "auth/register"
 export const loginUrl = apiDomain + "auth/login"
 export const addBucketList = apiDomain + 'bucketlists'
