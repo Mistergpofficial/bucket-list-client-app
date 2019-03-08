@@ -17,7 +17,7 @@
                  -->
                  
                  <p><u>Items in your Bucket List</u></p><br/><br/>
-                <span v-for="item in items.itemArray" :key="item._id" v-if="item.bucketlist === params">
+                <span v-for="item in items.itemArray" :key="item._id" >
                 <div class="col-lg-4 col-lg-4 col-sm-4">
                     <h2></h2>
                     
