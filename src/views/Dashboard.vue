@@ -7,8 +7,11 @@
             <div class="panel panel-primary">
  
                 <p>Welcome, {{ currentUser.full_name }} || <a @click="logout">Logout</a>
-                
                 <div class="panel-heading">Buckets <a class="pull-right btn btn-primary btn-sm" :href="`/bucketlists/create`">Create new</a></div>
+                    <br/>
+                            <div>
+                                <input type="text" name="search" v-model="search" placeholder="Bucket List Search" class="form-control">
+                            </div>
                     <div class="panel-body" v-if="bucketlistsRetrieved.count > 0">
                         <ul class="list-group" v-for="bucket in bucketlistsRetrieved.bucketArray" v-bind:key="bucket._id" v-show="bucket.full_name === currentUser.full_name">
         <li class="list-group-item">
@@ -37,12 +40,13 @@ export default {
     data () {
         return {
             bucketlistsRetrieved: [],
+            search: ""
         }
     },
       mounted(){
         this.getBucketLists();
         },
-    computed: {
+         computed: {
         loggedIn() {
             return this.$store.getters.loggedIn
         },
@@ -60,9 +64,8 @@ export default {
               this.bucketlistsRetrieved = response.body || JSON.parse(response.data)
           })
           },
-
-
-         logout: function () {
+          
+          logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
             window.location = "/login"
