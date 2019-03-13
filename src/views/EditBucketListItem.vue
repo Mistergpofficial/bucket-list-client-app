@@ -1,18 +1,15 @@
 <template>
-    <div class="container">
-        <br>
-        <br>
-        <br>
-        <div class="row col-md-9 col-lg-9 col-sm-9 pull-left">
-            <div class="row col-md-12 col-lg-12 col-sm-12" style="background-color: white; margin: 10px;">
+     <div>
+    <br/>
+    <br/>
+   <div class="col-md-9 col-lg-9 pull-left">
                 <div class="panel panel-primary">
-                    <div class="alert alert-dismissable alert-success" v-if="submitted">
+               <div class="alert alert-dismissable alert-success" v-if="submitted">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
                         Update is successful
                     </div>
                     <div class="panel-heading">EDIT BUCKET LIST ITEM</div>
                     <p style="color:red;">{{ error.message }}</p><br/>
-                                
                     <div class="panel-body">
                         <form @submit.prevent="edit()" @keydown="clear($event.target.name)">
                             <div class="form-group">
@@ -39,24 +36,24 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
 
+      
 
-        <div class="col-sm-3 col-md-3 col-lg-3 pull-right" style="padding: 60px;">
-            <div class="sidebar-module">
-                <h4>Actions</h4>
-                <ol class="list-unstyled">
-                    <li><a :href="`/bucketlists`">All Bucket Listing</a></li>
-                </ol>
-            </div>
-
-        </div>
-
-
-
-
+       <!-- Site footer -->
+      <footer class="footer">
+        <p>© 2019 Meeks Bucket Listing.</p>
+      </footer>
+       
     </div>
+      <div class="sidebar-module">
+            <h4>Actions</h4>
+            <ol class="list-unstyled" v-if="currentUser.full_name">
+                    <li><router-link to="/bucketlists" tag="span" active-class="active" exact>Bucket Listing</router-link></li>
+                    <li><router-link to="/bucketlists/create" tag="span" active-class="active" exact>Create new Bucket List Item</router-link></li>
+                    <li><a @click="logout">Logout</a></li>
+            </ol>
+          </div>
+</div> 
 </template>
 
 <script>
@@ -104,7 +101,13 @@ import {getBucketListById} from '../config'
                     this.error = err.response.data;
                     });
             },
-
+                 logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+            window.location = "/"
+          //this.$router.push({name: 'login'})
+        })
+      },
          clear(){
         this.error = false;
                  },   

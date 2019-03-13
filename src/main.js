@@ -43,7 +43,7 @@ else if(to.matched.some(record => record.meta.forAuth))
         {
             if(store.getters.loggedIn === false){
                 next({
-                    path: '/login'
+                    path: '/'
                 })
             }else next()
         }

@@ -1,62 +1,45 @@
 <template>
-    <div class="container">
-    <br>
- <br>
- <br>
- <br>
- <br>
-        <div class="row col-md-9 col-lg-9 col-sm-9 pull-left">
-            <div class="jumbotron">
-            <h1 v-if="bucketlist.full_name === currentUser.full_name">{{ bucketlist.bucket_list_name }}</h1>
-            <p class="lead"></p>
-            <p><a class="btn btn-lg btn-success">Get Started Today</a></p>
-            </div>
+<div>
+    <br/>
+    <br/>
+   <div class="col-md-9 col-lg-9 pull-left">
+    <!-- Jumbotron -->
+      <div class="jumbotron">
+            <marquee>Your Bucket List</marquee>
+        <h1 v-if="bucketlist.full_name === currentUser.full_name">{{ bucketlist.bucket_list_name }}</h1>
+        <p class="lead">Created By: {{ bucketlist.full_name }}</p>
+        <p>Created: {{ bucketlist.createdAt | timeago }}</p>
+      </div>
 
-            <div class="row col-md-12 col-lg-12 col-sm-12" style="background-color: white; margin: 10px;">
-            <!-- <a :href="`/bucketlists/${bucketlist._id}/items`" class="pull-right btn btn-success btn-sm">Add Item</a>
-                 -->
-                 
-                 <p><u>Items in your Bucket List</u></p><br/><br/>
-                <span v-for="item in items.itemArray" :key="item._id" v-if="item.bucketlist === params">
-                <div class="col-lg-4 col-lg-4 col-sm-4">
-                 <p class="text-danger">{{ item.item_name }}</p>
-                 <p><a :href="`/bucketlists/${bucketlist._id}/item/${item._id}`" class="btn btn-primary" role="button">View Item</a></p>
-                </div>
-                </span><br/><br/>
-                <div id="alert-info" v-if="!items.count">
-                    <center class="m-t-lg">{{ items.message }}</center>
-                </div>
-                 <!-- <span v-if="!items.count">
-                 <center class="m-t-lg">{{ items.message }}</center>
-                </span> -->
-            </div>
+      <!-- Example row of columns -->
+      <p><u><strong>Items in your Bucket List</strong></u></p>
+      <div class="row">
+        <div class="col-lg-4" v-for="item in items.itemArray" :key="item._id" v-if="item.bucketlist === params">
+          <h2>{{ item.item_name }}</h2>
+          <p><a class="btn btn-primary" :href="`/bucketlists/${bucketlist._id}/item/${item._id}`" role="button">View details »</a></p>
         </div>
+         <div class="col-lg-4" v-if="!items.count">
+          <h2>{{ items.message }}</h2>
+        </div>
+      </div>
 
-
-        <div class="col-sm-3 col-md-3 col-lg-3 pull-right" style="padding: 60px;">
-            <div class="sidebar-module">
-                <h4>Actions</h4>
-                <ol class="list-unstyled" v-show="bucketlist.full_name === currentUser.full_name">
+       <!-- Site footer -->
+      <footer class="footer">
+        <p>© 2019 Meeks Bucket Listing.</p>
+      </footer>
+       
+    </div>
+      <div class="sidebar-module">
+            <h4>Actions</h4>
+            <ol class="list-unstyled" v-if="bucketlist.full_name === currentUser.full_name">
                     <li><a :href="`/bucketlists/${bucketlist._id}/edit`">Edit Bucket List</a></li>
                     <li><a @click="remove">Delete Bucket List</a></li>
                     <li><a :href="`/bucketlists/${bucketlist._id}/items`">Add Item to Bucket List</a></li>
-                    <li><a :href="`/bucketlists`">Bucket Listing</a></li>
-                    <li><a :href="`/bucketlists/create`">Create new Bucket List</a></li>
-                </ol>
-            </div>
-
-            <div class="sidebar-module">
-                <h4>Members</h4>
-                <ol class="list-unstyled">
-                    <li><a href="">{{ currentUser.full_name }}</a></li>
-                </ol>
-            </div>
-        </div>
-
-
-
-
-    </div>
+                    <li><a :href="`/bucketlists`">All Bucket Listing</a></li>
+                    <li><a @click="logout">Logout</a></li>
+            </ol>
+          </div>
+</div>
 </template>
 
 <script>
@@ -129,7 +112,8 @@ export default {
          logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
-          this.$router.push({name: 'login'})
+          window.location = "/"
+          //this.$router.push({name: '/'})
         })
       }
     }

@@ -35,7 +35,6 @@
 <script>
 import Header from "@/views/partials/homepage/dashboard/Header.vue";
  import {getAllBucketList} from '../config'
-//import BucketListService from '@/services/BucketListService'
 export default {
     data () {
         return {
@@ -68,7 +67,7 @@ export default {
           logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
-            window.location = "/login"
+            window.location = "/"
           //this.$router.push({name: 'login'})
         })
       }

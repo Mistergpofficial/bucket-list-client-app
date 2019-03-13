@@ -1,6 +1,5 @@
 <template>
   <div class="">
-   <Header></Header>
 	 <Body></Body>
 	 <Footer></Footer>
   </div>
@@ -8,14 +7,12 @@
 
 <script>
 // @ is an alias to /src
-import Header from '@/views/partials/homepage/Header.vue'
 import Body from '@/views/partials/homepage/HomePageBody.vue'
 import Footer from '@/views/partials/homepage/Footer.vue'
 
 export default {
   name: 'home',
   components: {
-		Header,
 		Body,
     Footer
   },

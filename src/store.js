@@ -4,7 +4,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 Vue.use(axios);
-const regUrl = "http://localhost:4000/auth/register"
 
 export default new Vuex.Store({
   strict: true,
