@@ -29,7 +29,7 @@
       <!-- Example row of columns -->
       <p><u><strong>Your Bucket Lists</strong></u></p>
       <div class="row">
-        <div class="col-lg-4" v-for="bucket in bucketlistsRetrieved.bucketArray" v-bind:key="bucket._id" >
+        <div class="col-lg-4" v-for="bucket in bucketlistsRetrieved.bucketArray" v-bind:key="bucket._id" v-if="bucket.full_name === currentUser.full_name">
           <h2><a :href="`/bucketlists/${bucket._id}`">{{ bucket.bucket_list_name }}</a></h2>
         </div>
          <div class="col-lg-4"  v-if="!bucketlistsRetrieved.count">

@@ -49,6 +49,10 @@
           
                 <div class="row">
                   <div class="col-xs-12 col-sm-12">
+                    <div class="alert alert-success" v-if="submitted">
+                                   <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
+                                   Registered Successfully
+                               </div>
                       <span style="color:red;" v-if="errors.length > 0">{{ errors }}</span><br/>
                     <form @submit.prevent="register()"  name="signupForm" class="signupForm" @keydown="clear($event.target.name)">
                        <div class="form-group">
