@@ -27,9 +27,3 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
- @import "/css/admin/bootstrap.min.css";
- @import "/static/css/admin/font-awesome.min.css";
- @import "/static/css/admin/ionicons.css";
- @import "/static/css/admin/simple-line-icons.css";
-</style>

@@ -8,7 +8,7 @@
                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
                            Bucket Details Added Successfully
                     </div>
-                    <div class="panel-heading">ADD NEW BUCKET</div>
+                    <div class="panel-heading">CREATE A NEW BUCKET</div>
                     <div class="panel-body">
                         <form @submit.prevent="addBucketList" @keydown="clear($event.target.name)">
                             <div class="form-group">
@@ -29,7 +29,7 @@
       <!-- Example row of columns -->
       <p><u><strong>Your Bucket Lists</strong></u></p>
       <div class="row">
-        <div class="col-lg-4" v-for="bucket in bucketlistsRetrieved.bucketArray" v-bind:key="bucket._id" v-if="bucket.full_name === currentUser.full_name">
+        <div class="col-lg-4" v-for="bucket in bucketlistsRetrieved.data" v-bind:key="bucket._id" v-if="bucket.full_name === currentUser.full_name">
           <h2><a :href="`/bucketlists/${bucket._id}`">{{ bucket.bucket_list_name }}</a></h2>
         </div>
          <div class="col-lg-4"  v-if="!bucketlistsRetrieved.count">

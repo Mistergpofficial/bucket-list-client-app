@@ -16,7 +16,7 @@
                                     <label>Select BucketList</label>
                                     <select name="bucketlist_id" class="form-control" v-model="itemData.bucketlist_id">
                                         <option value="0">Choose a bucketlist --*</option>
-                                        <option v-for="bucket in bucketlists.bucketArray"  v-bind:value="bucket._id" v-if="bucket.full_name === currentUser.full_name">{{bucket.bucket_list_name}}</option>
+                                        <option v-for="bucket in bucketlists.data"  v-bind:value="bucket._id" v-if="bucket.full_name === currentUser.full_name && bucket._id === itemData.bucketlist_id">{{bucket.bucket_list_name}}</option>
                                     </select>
                                 </div>
                             <div class="form-group">
@@ -114,6 +114,7 @@
                 .then(response => {
                     this.submitted = true;
                     this.itemData = "";
+                     window.location = '/bucketlists'
                 })
                 .catch(err => {
                     this.error = err.body;
