@@ -1,17 +1,28 @@
 <template>
   <div class="">
-   <Header></Header>
-	  <!--==========Error area==========-->
-        <section class="error_area p_100">
-            <div class="container">
-                <div class="error_content">
-                    <h3>404</h3>
-                    <h4>This page is not be found</h4>
-                    <p>Uh oh, we can’t seem to find the page you’re looking for. Try going back to the previous page or see our Help Center for more information</p>
-                    <a class="blog_btn" href="/">Back to Home Page</a>
-                </div>
-            </div>
-        </section>
+    <section id="content"> 
+      <div class="row m-n"> 
+        <div class="col-sm-4 col-sm-offset-4"> 
+          <div class="text-center m-b-lg"> 
+            <h1 class="h text-white animated bounceInDown">404</h1> 
+          </div> 
+          <div class="list-group m-b-sm bg-white m-b-lg"> 
+            <a :href="`/`" class="list-group-item"> 
+              <i class="fa fa-chevron-right text-muted"></i> 
+              <i class="fa fa-fw fa-home text-muted"></i> Goto homepage 
+            </a> 
+            <a href="#" class="list-group-item"> 
+              <i class="fa fa-chevron-right text-muted"></i> 
+              <i class="fa fa-fw fa-question text-muted"></i> Send us a tip 
+              </a> 
+            <a href="#" class="list-group-item"> 
+              <i class="fa fa-chevron-right text-muted"></i> 
+              <span class="badge">+234(70)88510224</span> 
+              <i class="fa fa-fw fa-phone text-muted"></i> Call us 
+            </a> </div> 
+          </div> 
+        </div> 
+      </section>
 	 <Footer></Footer>
   </div>
 </template>
