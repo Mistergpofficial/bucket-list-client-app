@@ -25,7 +25,7 @@
 <div class="panel-body" v-if="searchArray.data">
     <ul class="list-group">
         <li class="list-group-item">
-            <a :href="`/bucketlists/${searchArray.data._id}`"  class="btn-default">{{ searchArray.data.bucket_list_name }} || created by {{ searchArray.data.full_name }}</a>
+            <a :href="`/bucketlists/${searchArray.data._id}`">{{ searchArray.data.bucket_list_name }} || created by {{ searchArray.data.full_name }}</a>
         </li>
     </ul>
 </div>
